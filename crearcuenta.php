@@ -83,7 +83,7 @@
             echo 'Revise su usuario o su contrasena';
             session_start();
             $_SESSION['uname']=$uname;
-            header("Location: /youtube/registro.php");
+            header("Location: /youtube/crearcuenta.php");
             echo $uname;
         }
     }
@@ -100,7 +100,7 @@
                         
                             <div class="6u 12u(mobile)">
                                 <section>
-                                    <form method="post" action="registro.php">
+                                    <form method="post" action="crearcuenta.php">
                                             <input name="uname" placeholder="nombre" type="text" required />
                                             <br>
                                             <input name="ap1" placeholder="apellido paterno" type="text" required />

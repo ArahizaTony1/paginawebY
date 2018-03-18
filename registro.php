@@ -47,86 +47,94 @@
                 </div>
 
             
-                              
-<?
-    require_once('conexion.php');
-   if(isset($_POST['uname']) && !empty($_POST['uname'])){
-        $uname=$_POST['uname'];
-        $apellido1=$_POST['ap1'];
-        $apellido2=$_POST['ap2'];
-        $mail=$_POST['email'];
-        $psw=$_POST['psw'];
-        
-        
-        $sql="INSERT INTO administrador (nombre,apellidoP,apeliidoM,correo,contrasena)
-        values('$uname','$apellido1','$apellido2','$mail','$psw')";
-        $con=new mysqli(servidorbd,usuariobd,psw,nombrebd);
-        
-        if($con->connect_error)
-        {
-            echo 'Error'.$con->connect_error;
-        }
-
-        $result=$con->query($sql);
-
-        if($result->num_rows>0){
-
-            echo "Redirigir";
-            $con->close();
-            
-            
-            
-
-        }else
-        {
-            $con->close();
-            echo 'Revise su usuario o su contrasena';
-            session_start();
-            $_SESSION['uname']=$uname;
-            header("Location: /youtube/registro.php");
-            echo $uname;
-        }
-    }
-    ?>
-            <!-- Footer -->
-
-            
-                <div id="footer-wrapper">
+             <div id="footer-wrapper">
                     <div id="footer" class="container">
-                        <center>
                         <header>
                             <h2>Iniciar sesion <strong>Registrate!!</strong></h2>
                         </header>
                         
-                            <div class="6u 12u(mobile)">
+                            
                                 <section>
-                                    <form method="post" action="registro.php">
-                                            <input name="uname" placeholder="nombre" type="text" required />
-                                            <br>
-                                            <input name="ap1" placeholder="apellido paterno" type="text" required />
-                                            <br>
-                                            <input name="ap2" placeholder="apellido materno" type="text" required />
-                                            <br>
-                                            <input name="email" placeholder="Correo Electronico" type="text" required />
-                                            <br>
-                                            <input id="ejemplo" name="psw" placeholder="contraseña" type="password" required>
-                                            <br>
+                                    <form method="post" action="#">
+                                        <div class="row 50%">
+                                            <div class="6u 12u(mobile)">
+                                                <input name="name" placeholder="Name" type="text" />
                                             </div>
-                                            <br>
-                                            <div class="row 50%">
+                                            <div class="6u 12u(mobile)">
+                                                <input name="email" placeholder="Email" type="text" />
+                                            </div>
+                                        </div>
+                                        <div class="row 50%">
                                             <div class="12u">
-                                            
-                                            <input  class="form-button-submit button icon fa-envelope" type="submit" value="Registrarse">
-                                            
-                                            <br>
-                                            
+                                                
                                             </div>
-                                    
+                                        </div>
+                                        <center>
+                                        <div class="row 50%">
+                                            <div class="12u">
+                                                <a href="#" class="form-button-submit button icon fa-envelope">Send Message</a>
+                                            </div>
+                                        </div>
+                                        </center>
                                     </form>
                                 </section>
-                                </center>       
+                           
+
+
+
+                            
+
+                            <div >
+                                <section>
+                                    <p>Erat lorem ipsum veroeros consequat magna tempus lorem ipsum consequat Phaselamet
+                                    mollis tortor congue. Sed quis mauris sit amet magna accumsan tristique. Curabitur
+                                    leo nibh, rutrum eu malesuada.</p>
+                                    <div class="row">
+                                        <div class="6u 12u(mobile)">
+                                            <ul class="icons">
+                                                <li class="icon fa-home">
+                                                    1234 Somewhere Road<br />
+                                                    Nashville, TN 00000<br />
+                                                    USA
+                                                </li>
+                                                <li class="icon fa-phone">
+                                                    (000) 000-0000
+                                                </li>
+                                                <li class="icon fa-envelope">
+                                                    <a href="#">info@untitled.tld</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="6u 12u(mobile)">
+                                            <ul class="icons">
+                                                <li class="icon fa-twitter">
+                                                    <a href="#">@untitled-tld</a>
+                                                </li>
+                                                <li class="icon fa-instagram">
+                                                    <a href="#">instagram.com/untitled-tld</a>
+                                                </li>
+                                                <li class="icon fa-dribbble">
+                                                    <a href="#">dribbble.com/untitled-tld</a>
+                                                </li>
+                                                <li class="icon fa-facebook">
+                                                    <a href="#">facebook.com/untitled-tld</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </section>
                             </div>
-                    
+                        </div>
+                    </div>
+                    <div id="copyright" class="container">
+                        <ul class="links">
+                            <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+        </div>                  
+
         
 
         <!-- Scripts -->
