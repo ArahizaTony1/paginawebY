@@ -83,7 +83,7 @@
             echo 'Revise su usuario o su contrasena';
             session_start();
             $_SESSION['uname']=$uname;
-            header("Location: /youtube/crearcuenta.php");
+            header("Location: /youtube/formulario.php");
             echo $uname;
         }
     }

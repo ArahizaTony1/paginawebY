@@ -39,6 +39,7 @@ if($_SESSION['uname']!=null){
 										<ul>
 											<li><a href="registro.php">Iniciar sesion</a></li>
 											<li><a href="crearcuenta.php">crear cuenta</a></li>
+											<a href="cerra.php">cerrar Sesion</a>
 											
 										</ul>
 									</li>
@@ -66,7 +67,7 @@ if($_SESSION['uname']!=null){
     <th style="width:10%;">Titulo</th>
     <th style="width:20%;">Descripcion</th>
     <th style="width:10%;">Fecha</th>
-      <th style="width:10%;">Tipo</th>
+      <th style="width:10%;">Foto</th>
     <th style="width:10%;">Remover</th>
       <th style="width:10%;">Editar</th>
   </tr>
@@ -78,7 +79,7 @@ if($_SESSION['uname']!=null){
         {
             echo 'Error'.$con->connect_error;
         }
-        $sql="SELECT * FROM muestra;";
+        $sql="SELECT * FROM muestra";
         $result=$con->query($sql);
 
         if($result->num_rows>0){
@@ -132,7 +133,7 @@ if($_SESSION['uname']!=null){
         //alert('Dato seleccionado'+info);
         $.ajax({
             url: "del.php",
-            data: {id:info},
+            data: {IDmuestra:info},
             type: 'GET',
             dataType: 'text',
             success: function(response){
@@ -262,6 +263,6 @@ if($_SESSION['uname']!=null){
 	<?
 }
 else
-    header("Location: /efem/login.php");
+    header("Location: /youtube/registro.php");
 ?>
 </html>
