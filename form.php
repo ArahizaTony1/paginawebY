@@ -49,6 +49,66 @@
             
  
             <!-- Footer -->
+<?
+    require_once ('conexion.php');
+    
+    if(isset($_POST['info']))
+    {
+        $t=$_POST['titulo'];
+        $c=$_POST['contenido'];
+        $f=$_POST['fecha'];
+        $foto=$_FILES["user_image"]["name"];
+        $ruta=$_FILES["user_image"]["tmp_name"];
+        $destino="/".$user_image;
+        $conn = new mysqli(servidorbd, usuariobd, psw, nombrebd);
+       
+        if(isset($_POST['num']) && $_POST['num']>0){ //-modificada
+            $id1=$_POST['num'];
+            $sql="UPDATE muestra SET titulo='$t' , contenido='$c', fecha='$f', foto='$foto' WHERE IDmuestra=$id1";
+            $conn->query($sql);
+            $conn->close();
+            header('Location: /youtube/formulario.php');
+        }
+        else
+        {
+            if($_POST['num']==null){ //-modificada
+        
+                if ($conn->connect_error) {
+                    die("Error de conexión: " . $conn->connect_error);
+                } 
+                $sql="INSERT INTO muestra(titulo,contenido,fecha,foto) VALUES('$t','$c','$f','$foto')";
+                if($conn->query($sql)===TRUE){
+                    header('Location: /youtube/formulario.php');
+                }
+                else {
+                    echo "0 results";
+                }  
+            }
+        }
+    }
+    
+    if(isset($_GET['IDmuestra'])){
+        $id=$_GET['IDmuestra'];
+        $conn = new mysqli(servidorbd, usuariobd, psw, nombrebd);
+        // Check connection
+        if ($conn->connect_error) {
+            die("Error de conexión: " . $conn->connect_error);
+        } 
+        $sql="SELECT * FROM muestra WHERE IDmuestra=$id";
+        
+        $result=$conn->query($sql);
+        while($row=$result->fetch_assoc()){
+            $id=$row['IDmuestra'];
+            $titulo=$row['titulo'];
+            $fecha=$row['fecha'];
+            $contenido=$row['contenido'];
+            $foto=$row['foto'];
+        }
+        
+        $conn->close();
+        
+    }
+?>
 
             
                 <div id="footer-wrapper">
@@ -81,7 +141,7 @@
                                             <div class="12u">
                                             
                                             <br>    
-                                            <input  class="form-button-submit button icon fa-envelope" type="submit" value="Registrarse">
+                                            <input  class="form-button-submit button icon fa-envelope" type="submit" value="info">
                                             <br>
                                             </div>
                                             </div>
