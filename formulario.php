@@ -1,3 +1,9 @@
+<?
+session_start();
+if($_SESSION['uname']!=null){
+     
+?>
+
 <!DOCTYPE HTML>
 <!--
 	Strongly Typed by HTML5 UP
@@ -48,227 +54,119 @@
 				<div id="features-wrapper">
 					<section id="features" class="container">
 						<header>
-							<h2>Noticias de  <strong>Hoy</strong>!</h2>
+							<h2>Hola  <strong><? echo $_SESSION['uname']?></strong>!</h2>
+
 						</header>
 						<div class="row">
-							<div class="4u 12u(mobile)">
+							
+							
+<table id="myTable">
+  <tr class="header">
+    <th style="width:5%;">ID</th>  
+    <th style="width:10%;">Titulo</th>
+    <th style="width:20%;">Descripcion</th>
+    <th style="width:10%;">Fecha</th>
+      <th style="width:10%;">Tipo</th>
+    <th style="width:10%;">Remover</th>
+      <th style="width:10%;">Editar</th>
+  </tr>
+<?
+    require_once('conexion.php');
+    $con=new mysqli(servidorbd,usuariobd,psw,nombrebd);
+        
+        if($con->connect_error)
+        {
+            echo 'Error'.$con->connect_error;
+        }
+        $sql="SELECT * FROM muestra;";
+        $result=$con->query($sql);
 
-								<!-- Feature -->
-									<section>
-										<a href="#" class="image featured"><img src="images/pic01.jpg" alt="" /></a>
-										<header>
-											<h3>Okay, so what is this?</h3>
-										</header>
-										<p>This is <strong>Strongly Typed</strong>, a free, fully responsive site template
-										by <a href="http://html5up.net">HTML5 UP</a>. Free for personal and commercial use under the
-										<a href="http://html5up.net/license">CCA 3.0 license</a>.</p>
-									</section>
+        if($result->num_rows>0){
+            while($row=$result->fetch_assoc()){
+                $html="<tr id='".$row['IDmuestra']."'>";
+                $html.="<td>".$row['IDmuestra']."</td>";
+                $html.="<td>".$row['titulo']."</td>";
+                $html.="<td>".$row['contenido']."</td>";
+                $html.="<td>".$row['fecha']."</td>";
+                $html.="<td>".$row['foto']."</td>";
+                //$html.="<td><a href='formefe.php?id=".$row['id']."' ><img src='img/eraser.svg' title='Eliminar' width='15%'/></a></td>";
+                $html.="<td><a  href='#' onclick='eliminar(".$row['IDmuestra'].")' >Eliminar</a></td>";
+                
+                $html.="<td><a href='formefe.php?id=".$row['IDmuestra']."' >Editar</a></td>";
+                
+                
+                $html.="</tr>";
+                echo $html;
+            }
+            $con->close();
+        }else
+        {
+            $con->close();
+            echo '<h2>No hay informacion</h2>';
+        }
+    
+?>
+ 
+  
+</table>
 
-							</div>
-							<div class="4u 12u(mobile)">
 
-								<!-- Feature -->
-									<section>
-										<a href="#" class="image featured"><img src="images/pic02.jpg" alt="" /></a>
-										<header>
-											<h3>Nice! What is HTML5 UP?</h3>
-										</header>
-										<p><a href="http://html5up.net">HTML5 UP</a> is a side project of <a href="http://twitter.com/ajlkn">AJ’s</a> (= me).
-										I started it as a way to both test my <strong>skel</strong> framework and sharpen up my coding
-										and design skills a bit.</p>
-									</section>
 
-							</div>
-							<div class="4u 12u(mobile)">
 
-								<!-- Feature -->
-									<section>
-										<a href="#" class="image featured"><img src="images/pic03.jpg" alt="" /></a>
-										<header>
-											<h3>Skel? What's that?</h3>
-										</header>
-										<p><strong>Skel</strong> is a lightweight framework for building responsive
-										sites and apps. All of my stuff at <a href="http://html5up.net">HTML5 UP</a> (including this
-										one) are built on this framework.</p>
-									</section>
 
-							</div>
+
+
+
+<script type="application/javascript" src="js/jquery-3.2.1.min.js">
+</script>
+<script>
+    //http://librosweb.es/libro/fundamentos_jquery/capitulo_7/metodos_ajax_de_jquery.html
+    $(document).ready(
+        function(){
+         //alert('Hola Jquery');
+            $("#mensajes").hide();
+        });
+    
+    function eliminar(info)
+    {
+        //alert('Dato seleccionado'+info);
+        $.ajax({
+            url: "del.php",
+            data: {id:info},
+            type: 'GET',
+            dataType: 'text',
+            success: function(response){
+                //alert(response);
+                //location.reload();
+                $("#"+info).remove();
+                $("#mensajes").show();
+                $("#mensajes").html(response);
+                $("#mensajes").fadeOut(2000);
+                
+            }
+        });
+    }
+    
+    
+    //funcion para el filtro
+    
+</script>
+
+
+
+
+
+
+
+
+
+
 						</div>
-						<ul class="actions">
-							<li><a href="#" class="button icon fa-file">Tell Me More</a></li>
-						</ul>
+						
 					</section>
 				</div>
 
-			<!-- Banner -->
-				<div id="banner-wrapper">
-					<div class="inner">
-						<section id="banner" class="container">
-							<p>este espacio se destina a noticas <strong>anteriores</strong>.<br /></p>
-						</section>
-					</div>
-				</div>
-
-			<!-- Main -->
-				<div id="main-wrapper">
-					<div id="main" class="container">
-						<div class="row">
-
-							<!-- Content -->
-								<div id="content" class="8u 12u(mobile)">
-
-									<!-- Post -->
-										<article class="box post">
-											<header>
-												<h2><a href="#">I don’t want to say <strong>it’s the aliens</strong> ...<br />
-												but it’s the aliens.</a></h2>
-											</header>
-											<a href="#" class="image featured"><img src="images/pic04.jpg" alt="" /></a>
-											<h3>I mean isn't it possible?</h3>
-											<p>Phasellus laoreet massa id justo mattis pharetra. Fusce suscipit
-											ligula vel quam viverra sit amet mollis tortor congue. Sed quis mauris
-											sit amet magna accumsan tristique. Curabitur leo nibh, rutrum eu malesuada
-											in, tristique at erat lorem ipsum dolor sit amet lorem ipsum sed consequat
-											magna tempus veroeros lorem sed tempus aliquam lorem ipsum veroeros
-											consequat magna tempus lorem ipsum consequat Phasellus laoreet massa id
-											justo mattis pharetra. Fusce suscipit ligula vel quam viverra sit amet
-											mollis tortor congue. Sed quis mauris sit amet magna accumsan tristique.
-											Curabitur leo nibh, rutrum eu malesuada in, tristique at erat.</p>
-											<ul class="actions">
-												<li><a href="#" class="button icon fa-file">Continue Reading</a></li>
-											</ul>
-										</article>
-
-									<!-- Post -->
-										<article class="box post">
-											<header>
-												<h2><a href="#">By the way, many thanks to <strong>regularjane</strong>
-												for these awesome demo photos</a></h2>
-											</header>
-											<a href="#" class="image featured"><img src="images/pic05.jpg" alt="" /></a>
-											<h3>You should probably check out her work</h3>
-											<p>Phasellus laoreet massa id justo mattis pharetra. Fusce suscipit
-											ligula vel quam viverra sit amet mollis tortor congue. Sed quis mauris
-											sit amet magna accumsan tristique. Curabitur leo nibh, rutrum eu malesuada
-											in, tristique at erat lorem ipsum dolor sit amet lorem ipsum sed consequat
-											consequat magna tempus lorem ipsum consequat Phasellus laoreet massa id
-											in, tristique at erat lorem ipsum dolor sit amet lorem ipsum sed consequat
-											magna tempus veroeros lorem sed tempus aliquam lorem ipsum veroeros
-											consequat magna tempus lorem ipsum consequat Phasellus laoreet massa id
-											justo mattis pharetra. Fusce suscipit ligula vel quam viverra sit amet
-											mollis tortor congue. Sed quis mauris sit amet magna accumsan tristique.
-											Curabitur leo nibh, rutrum eu malesuada in, tristique at erat.</p>
-											<p>Erat lorem ipsum veroeros consequat magna tempus lorem ipsum consequat
-											Phasellus laoreet massa id justo mattis pharetra. Fusce suscipit ligula
-											vel quam viverra sit amet mollis tortor congue. Sed quis mauris sit amet
-											magna accumsan tristique. Curabitur leo nibh, rutrum eu malesuada in,
-											tristique at erat. Curabitur leo nibh, rutrum eu malesuada  in, tristique
-											at erat lorem ipsum dolor sit amet lorem ipsum sed consequat magna
-											tempus veroeros lorem sed tempus aliquam lorem ipsum veroeros consequat
-											magna tempus</p>
-											<ul class="actions">
-												<li><a href="#" class="button icon fa-file">Continue Reading</a></li>
-											</ul>
-										</article>
-
-								</div>
-
-							<!-- Sidebar -->
-								<div id="sidebar" class="4u 12u(mobile)">
-
-									<!-- Excerpts -->
-										<section>
-											<ul class="divided">
-												<li>
-
-													<!-- Excerpt -->
-														<article class="box excerpt">
-															<header>
-																<span class="date">July 30</span>
-																<h3><a href="#">Just another post</a></h3>
-															</header>
-															<p>Lorem ipsum dolor odio facilisis convallis. Etiam non nunc vel est
-															suscipit convallis non id orci lorem ipsum sed magna consequat feugiat lorem dolore.</p>
-														</article>
-
-												</li>
-												<li>
-
-													<!-- Excerpt -->
-														<article class="box excerpt">
-															<header>
-																<span class="date">July 28</span>
-																<h3><a href="#">And another post</a></h3>
-															</header>
-															<p>Lorem ipsum dolor odio facilisis convallis. Etiam non nunc vel est
-															suscipit convallis non id orci lorem ipsum sed magna consequat feugiat lorem dolore.</p>
-														</article>
-
-												</li>
-												<li>
-
-													<!-- Excerpt -->
-														<article class="box excerpt">
-															<header>
-																<span class="date">July 24</span>
-																<h3><a href="#">One more post</a></h3>
-															</header>
-															<p>Lorem ipsum dolor odio facilisis convallis. Etiam non nunc vel est
-															suscipit convallis non id orci lorem ipsum sed magna consequat feugiat lorem dolore.</p>
-														</article>
-
-												</li>
-											</ul>
-										</section>
-
-									<!-- Highlights -->
-										<section>
-											<ul class="divided">
-												<li>
-
-													<!-- Highlight -->
-														<article class="box highlight">
-															<header>
-																<h3><a href="#">Something of note</a></h3>
-															</header>
-															<a href="#" class="image left"><img src="images/pic06.jpg" alt="" /></a>
-															<p>Phasellus  sed laoreet massa id justo mattis pharetra. Fusce suscipit ligula vel quam
-															viverra sit amet mollis tortor congue magna lorem ipsum dolor et quisque ut odio facilisis
-															convallis. Etiam non nunc vel est suscipit convallis non id orci. Ut interdum tempus
-															facilisis convallis. Etiam non nunc vel est suscipit convallis non id orci.</p>
-															<ul class="actions">
-																<li><a href="#" class="button icon fa-file">Learn More</a></li>
-															</ul>
-														</article>
-
-												</li>
-												<li>
-
-													<!-- Highlight -->
-														<article class="box highlight">
-															<header>
-																<h3><a href="#">Something of less note</a></h3>
-															</header>
-															<a href="#" class="image left"><img src="images/pic07.jpg" alt="" /></a>
-															<p>Phasellus  sed laoreet massa id justo mattis pharetra. Fusce suscipit ligula vel quam
-															viverra sit amet mollis tortor congue magna lorem ipsum dolor et quisque ut odio facilisis
-															convallis. Etiam non nunc vel est suscipit convallis non id orci. Ut interdum tempus
-															facilisis convallis. Etiam non nunc vel est suscipit convallis non id orci.</p>
-															<ul class="actions">
-																<li><a href="#" class="button icon fa-file">Learn More</a></li>
-															</ul>
-														</article>
-
-												</li>
-											</ul>
-										</section>
-
-								</div>
-
-						</div>
-					</div>
-				</div>
-
+			
 			<!-- Footer -->
 				<div id="footer-wrapper">
 					<div id="footer" class="container">
@@ -361,4 +259,9 @@
 			<script src="assets/js/main.js"></script>
 
 	</body>
+	<?
+}
+else
+    header("Location: /efem/login.php");
+?>
 </html>
