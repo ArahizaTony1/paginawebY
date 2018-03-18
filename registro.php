@@ -45,6 +45,47 @@
 
                     </div>
                 </div>
+                <?
+    require_once('conexion.php');
+    
+    if(isset($_POST['uname']) && !empty($_POST['uname'])){
+        $uname=$_POST['uname'];
+        $psw=$_POST['psw'];
+
+
+
+        $sql="SELECT * FROM administrador WHERE correo='$uname' AND contrasena='$psw' LIMIT 1";
+        $con=new mysqli(servidorbd,usuariobd,psw,nombrebd);
+        
+        if($con->connect_error)
+        {
+            echo 'Error'.$con->connect_error;
+        }
+
+        $result=$con->query($sql);
+
+        if($result->num_rows>0){
+
+            echo "Redirigir";
+            $con->close();
+            session_start();
+            $_SESSION['uname']=$uname;
+            header("Location: /youtube/index.html");
+
+        }else
+        {
+            $con->close();
+            echo 'Revise su usuario o su contrasena';
+        }
+    }
+    
+    
+    
+    
+        
+    
+    ?>
+    
 
             
              <div id="footer-wrapper">
@@ -55,13 +96,14 @@
                         
                             
                                 <section>
-                                    <form method="post" action="#">
+                                    <form method="post" action="registro.php">
                                         <div class="row 50%">
                                             <div class="6u 12u(mobile)">
-                                                <input name="name" placeholder="Name" type="text" />
+                                                
+                                                 <input name="uname" placeholder="usuario" type="text" />
                                             </div>
                                             <div class="6u 12u(mobile)">
-                                                <input name="email" placeholder="Email" type="text" />
+                                                 <input name="psw" placeholder="password" type="password" />
                                             </div>
                                         </div>
                                         <div class="row 50%">
@@ -72,7 +114,7 @@
                                         <center>
                                         <div class="row 50%">
                                             <div class="12u">
-                                                <a href="#" class="form-button-submit button icon fa-envelope">Send Message</a>
+                                                <button type="submit">Iniciar Sesión</button>
                                             </div>
                                         </div>
                                         </center>
