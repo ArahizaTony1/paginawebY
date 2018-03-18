@@ -55,7 +55,7 @@
                     <div id="footer" class="container">
                         <center>
                         <header>
-                            <h2>Iniciar sesion <strong>Registrate!!</strong></h2>
+                            <h2>Formulario de  <strong>NOTICAS!!</strong></h2>
                         </header>
                         
                             <div class="6u 12u(mobile)">
