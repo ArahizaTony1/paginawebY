@@ -33,13 +33,14 @@ if($_SESSION['uname']!=null){
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
-									<li><a class="icon fa-home" href="index.html"><span>Inicio</span></a></li>
+									<li><a class="icon fa-home" href="index.php"><span>Inicio</span></a></li>
 									<li>
 										<a href="#" class="icon fa-bar-chart-o"><span>Presioname</span></a>
 										<ul>
 											<li><a href="registro.php">Iniciar sesion</a></li>
 											<li><a href="crearcuenta.php">crear cuenta</a></li>
-											<a href="cerra.php">cerrar Sesion</a>
+											<li><a href="cerra.php">cerrar Sesion</a></li>
+											<li><a href="form.php">Agregar nota</a></li>
 											
 										</ul>
 									</li>

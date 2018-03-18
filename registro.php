@@ -23,13 +23,13 @@
                     <div id="header" class="container">
 
                         <!-- Logo -->
-                            <h1 id="logo"><a href="index.html">Juega con la Noticia</a></h1>
+                            <h1 id="logo"><a href="index.php">Juega con la Noticia</a></h1>
                             <p>Una pagina destinada a noticas Android </p>
 
                         <!-- Nav -->
                             <nav id="nav">
                                 <ul>
-                                    <li><a class="icon fa-home" href="index.html"><span>Inicio</span></a></li>
+                                    <li><a class="icon fa-home" href="index.php"><span>Inicio</span></a></li>
                                     <li>
                                         <a href="#" class="icon fa-bar-chart-o"><span>Presioname</span></a>
                                         <ul>

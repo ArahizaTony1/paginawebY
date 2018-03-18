@@ -14,8 +14,8 @@
         <!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
         <link rel="stylesheet" href="assets/css/main.css" />
         <!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-    </head>
-    <body class="homepage">
+                </head>
+        <body class="homepage">
         <div id="page-wrapper">
 
             <!-- Header -->
@@ -47,47 +47,7 @@
                 </div>
 
             
-                              
-<?
-    require_once('conexion.php');
-   if(isset($_POST['uname']) && !empty($_POST['uname'])){
-        $uname=$_POST['uname'];
-        $apellido1=$_POST['ap1'];
-        $apellido2=$_POST['ap2'];
-        $mail=$_POST['email'];
-        $psw=$_POST['psw'];
-        
-        
-        $sql="INSERT INTO administrador (nombre,apellidoP,apeliidoM,correo,contrasena)
-        values('$uname','$apellido1','$apellido2','$mail','$psw')";
-        $con=new mysqli(servidorbd,usuariobd,psw,nombrebd);
-        
-        if($con->connect_error)
-        {
-            echo 'Error'.$con->connect_error;
-        }
-
-        $result=$con->query($sql);
-
-        if($result->num_rows>0){
-
-            echo "Redirigir";
-            $con->close();
-            
-            
-            
-
-        }else
-        {
-            $con->close();
-            echo 'Revise su usuario o su contrasena';
-            session_start();
-            $_SESSION['uname']=$uname;
-            header("Location: /youtube/formulario.php");
-            echo $uname;
-        }
-    }
-    ?>
+ 
             <!-- Footer -->
 
             
@@ -100,38 +60,43 @@
                         
                             <div class="6u 12u(mobile)">
                                 <section>
-                                    <form method="post" action="crearcuenta.php">
-                                            <input name="uname" placeholder="nombre" type="text" required />
+                                    <form method="post" action="form.php">
+                                           
+                                            <input type="text" id="txtnum" name="num" value="<?echo $id?>" placeholder="..." readonly>
                                             <br>
-                                            <input name="ap1" placeholder="apellido paterno" type="text" required />
+                                            <input name="title" placeholder="titulo" type="text" required />
                                             <br>
-                                            <input name="ap2" placeholder="apellido materno" type="text" required />
-                                            <br>
-                                            <input name="email" placeholder="Correo Electronico" type="text" required />
-                                            <br>
-                                            <input id="ejemplo" name="psw" placeholder="contraseña" type="password" required>
-                                            <br>
+
+                                            <div class="row 50%">
+                                            <div class="12u">
+                                            <textarea name="Noticia" placeholder="Noticia"></textarea>
+                                            </div>
                                             </div>
                                             <br>
+                                            <input type="text" id="txtfecha" name="fecha" value="<?echo $fecha?>" required placeholder="Fecha">
+                                            <br>
+                                            <input type="file" name="user_image" accept="/home/arahiza/Documentos/*" />
+                                       
                                             <div class="row 50%">
                                             <div class="12u">
                                             
+                                            <br>    
                                             <input  class="form-button-submit button icon fa-envelope" type="submit" value="Registrarse">
-                                            
                                             <br>
-                                            
                                             </div>
-                                    
-                                    </form>
-                                </section>
-                                </center>    
+                                            </div>
+                                      </form>
+                                   </section>
+                                </div>
+                                </center>  
                                 <div id="copyright" class="container">
-                        <ul class="links">
-                            <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-                        </ul>
-                    </div>
-                </div>   
-                            </div>
+                                <ul class="links">
+                                <li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+                                </ul>
+                                </div>
+                     </div> 
+                 </div>  
+                    
                     
         
 
@@ -143,6 +108,17 @@
             <script src="assets/js/util.js"></script>
             <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
             <script src="assets/js/main.js"></script>
+            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            <script>
+            $( function() {
+            $( "#txtfecha" ).datepicker({
+            dateFormat: "yy-mm-dd"
+            });
+
+            } );
+            </script>
+
 
     </body>
 </html>
