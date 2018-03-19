@@ -68,7 +68,7 @@ if($_SESSION['uname']!=null){
     <th style="width:10%;">Titulo</th>
     <th style="width:20%;">Descripcion</th>
     <th style="width:10%;">Fecha</th>
-      <th style="width:10%;">Foto</th>
+      <th style="width:10%;">Tipo</th>
     <th style="width:10%;">Remover</th>
       <th style="width:10%;">Editar</th>
   </tr>
@@ -80,21 +80,21 @@ if($_SESSION['uname']!=null){
         {
             echo 'Error'.$con->connect_error;
         }
-        $sql="SELECT * FROM muestra";
+        $sql="SELECT * FROM efemerides_completas";
         $result=$con->query($sql);
 
         if($result->num_rows>0){
             while($row=$result->fetch_assoc()){
-                $html="<tr id='".$row['IDmuestra']."'>";
-                $html.="<td>".$row['IDmuestra']."</td>";
+                $html="<tr id='".$row['id']."'>";
+                $html.="<td>".$row['id']."</td>";
                 $html.="<td>".$row['titulo']."</td>";
                 $html.="<td>".$row['contenido']."</td>";
                 $html.="<td>".$row['fecha']."</td>";
-                $html.="<td>".$row['foto']."</td>";
+                $html.="<td>".$row['tipo']."</td>";
                 //$html.="<td><a href='formefe.php?id=".$row['id']."' ><img src='img/eraser.svg' title='Eliminar' width='15%'/></a></td>";
-                $html.="<td><a  href='#' onclick='eliminar(".$row['IDmuestra'].")' >Eliminar</a></td>";
+                $html.="<td><a href='#' onclick='eliminar(".$row['id'].")' ><img src='img/eraser.svg' title='Eliminar' width='15%'/></a></td>";
                 
-                $html.="<td><a href='formefe.php?id=".$row['IDmuestra']."' >Editar</a></td>";
+                $html.="<td><a href='form.php?id=".$row['id']."' ><img src='img/edit.svg' title='Editar' width='15%'/></a></td>";
                 
                 
                 $html.="</tr>";
@@ -112,13 +112,6 @@ if($_SESSION['uname']!=null){
   
 </table>
 
-
-
-
-
-
-
-
 <script type="application/javascript" src="js/jquery-3.2.1.min.js">
 </script>
 <script>
@@ -134,7 +127,7 @@ if($_SESSION['uname']!=null){
         //alert('Dato seleccionado'+info);
         $.ajax({
             url: "del.php",
-            data: {IDmuestra:info},
+            data: {id:info},
             type: 'GET',
             dataType: 'text',
             success: function(response){
@@ -148,28 +141,8 @@ if($_SESSION['uname']!=null){
             }
         });
     }
-    
-    
-    //funcion para el filtro
-    
-</script>
-
-
-
-
-
-
-
-
-
-
-						</div>
-						
-					</section>
-				</div>
-
-			
-			<!-- Footer -->
+</script>			
+			<!-- Footer 
 				<div id="footer-wrapper">
 					<div id="footer" class="container">
 						<header>
@@ -250,7 +223,7 @@ if($_SESSION['uname']!=null){
 				</div>
 
 		</div>
-
+-->
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.dropotron.min.js"></script>

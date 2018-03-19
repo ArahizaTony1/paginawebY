@@ -48,23 +48,25 @@
 
             
  
-            <!-- Footer -->
+            
+
+ 
+
+
 <?
     require_once ('conexion.php');
     
     if(isset($_POST['info']))
     {
         $t=$_POST['titulo'];
-        $c=$_POST['contenido'];
+        $c=$_POST['descripcion'];
         $f=$_POST['fecha'];
-        $foto=$_FILES["user_image"]["name"];
-        $ruta=$_FILES["user_image"]["tmp_name"];
-        $destino="/".$user_image;
+        $tipo=$_POST['tipo'];
         $conn = new mysqli(servidorbd, usuariobd, psw, nombrebd);
        
         if(isset($_POST['num']) && $_POST['num']>0){ //-modificada
             $id1=$_POST['num'];
-            $sql="UPDATE muestra SET titulo='$t' , contenido='$c', fecha='$f', foto='$foto' WHERE IDmuestra=$id1";
+            $sql="UPDATE efemerides_completas SET titulo='$t' , contenido='$c', fecha='$f', tipo='$tipo' WHERE id=$id1";
             $conn->query($sql);
             $conn->close();
             header('Location: /youtube/formulario.php');
@@ -76,7 +78,7 @@
                 if ($conn->connect_error) {
                     die("Error de conexión: " . $conn->connect_error);
                 } 
-                $sql="INSERT INTO muestra(titulo,contenido,fecha,foto) VALUES('$t','$c','$f','$foto')";
+                $sql="INSERT INTO efemerides_completas (titulo,contenido,fecha,tipo) VALUES('$t','$c','$f','$tipo')";
                 if($conn->query($sql)===TRUE){
                     header('Location: /youtube/formulario.php');
                 }
@@ -87,28 +89,71 @@
         }
     }
     
-    if(isset($_GET['IDmuestra'])){
-        $id=$_GET['IDmuestra'];
+    if(isset($_GET['id'])){
+        $id=$_GET['id'];
         $conn = new mysqli(servidorbd, usuariobd, psw, nombrebd);
         // Check connection
         if ($conn->connect_error) {
             die("Error de conexión: " . $conn->connect_error);
         } 
-        $sql="SELECT * FROM muestra WHERE IDmuestra=$id";
+        $sql="SELECT * FROM efemerides_completas  WHERE id=$id";
         
         $result=$conn->query($sql);
         while($row=$result->fetch_assoc()){
-            $id=$row['IDmuestra'];
+            $id=$row['id'];
             $titulo=$row['titulo'];
             $fecha=$row['fecha'];
             $contenido=$row['contenido'];
-            $foto=$row['foto'];
         }
         
         $conn->close();
         
     }
 ?>
+<div class="container">
+  <form action="form.php" method="post">
+    <label for="txtnum">Num</label>
+    <input type="text" id="txtnum" name="num" value="<?echo $id?>" placeholder="..." readonly>
+      
+    <label for="txtfecha">Fecha</label>
+    <input type="text" id="txtfecha" name="fecha" value="<?echo $fecha?>" required placeholder="Fecha">
+
+    <label for="txttitulo">Titulo</label>
+    <input type="text" id="txttiutulo" name="titulo" value="<?echo $titulo?>" required placeholder="Titulo Efemeride">
+
+    <label for="tipo">Tipo Efemeride</label>
+    <select id="tipo" name="tipo" required>
+      <option value="local">Local</option>
+      <option value="nacional">Nacional</option>
+      <option value="internacional">Internacional</option>
+    </select>
+
+    <label for="txtdescripcion">Descripcion</label>
+    <textarea id="txtdescripcion" name="descripcion"  required placeholder="Descripcion de Efemeride" style="height:200px"><?echo $contenido?></textarea>
+
+    <input name="info" type="submit" value="Guardar">
+      <a href="mostrarefe.php" class="boton">Cancelar</a>
+  </form>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Footer 
 
             
                 <div id="footer-wrapper">
@@ -122,24 +167,21 @@
                                 <section>
                                     <form method="post" action="form.php">
                                            
-                                            <input type="text" id="txtnum" name="num" value="<?echo $id?>" placeholder="..." readonly>
+                                            <input type="text" id="txtnum" name="num" value="<?echo $IDmuestra?>" placeholder="..." readonly>
                                             <br>
-                                            <input name="title" placeholder="titulo" type="text" required />
+                                            <input name="title" placeholder="titulo" value="<?echo $titulo?>" type="text" required />
                                             <br>
 
                                             <div class="row 50%">
                                             <div class="12u">
-                                            <textarea name="Noticia" placeholder="Noticia"></textarea>
+                                            <textarea name="contenido" placeholder="Noticia"><?echo $contenido?></textarea>
                                             </div>
                                             </div>
                                             <br>
                                             <input type="text" id="txtfecha" name="fecha" value="<?echo $fecha?>" required placeholder="Fecha">
                                             <br>
-                                            <input type="file" name="user_image" accept="/home/arahiza/Documentos/*" />
-                                       
                                             <div class="row 50%">
                                             <div class="12u">
-                                            
                                             <br>    
                                             <input  class="form-button-submit button icon fa-envelope" type="submit" value="info">
                                             <br>
@@ -158,7 +200,7 @@
                  </div>  
                     
                     
-        
+        -->
 
         <!-- Scripts -->
             <script src="assets/js/jquery.min.js"></script>
