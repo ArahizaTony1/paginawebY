@@ -110,16 +110,17 @@
         
     }
 ?>
+<!--
 <div class="container">
   <form action="form.php" method="post">
     <label for="txtnum">Num</label>
     <input type="text" id="txtnum" name="num" value="<?echo $id?>" placeholder="..." readonly>
       
     <label for="txtfecha">Fecha</label>
-    <input type="text" id="txtfecha" name="fecha" value="<?echo $fecha?>" required placeholder="Fecha">
+    
 
     <label for="txttitulo">Titulo</label>
-    <input type="text" id="txttiutulo" name="titulo" value="<?echo $titulo?>" required placeholder="Titulo Efemeride">
+
 
     <label for="tipo">Tipo Efemeride</label>
     <select id="tipo" name="tipo" required>
@@ -129,7 +130,7 @@
     </select>
 
     <label for="txtdescripcion">Descripcion</label>
-    <textarea id="txtdescripcion" name="descripcion"  required placeholder="Descripcion de Efemeride" style="height:200px"><?echo $contenido?></textarea>
+    <textarea  style="height:200px"><?echo $contenido?></textarea>
 
     <input name="info" type="submit" value="Guardar">
       <a href="mostrarefe.php" class="boton">Cancelar</a>
@@ -137,6 +138,7 @@
 </div>
 
 
+-->
 
 
 
@@ -152,8 +154,7 @@
 
 
 
-
-<!-- Footer 
+ 
 
             
                 <div id="footer-wrapper">
@@ -165,25 +166,24 @@
                         
                             <div class="6u 12u(mobile)">
                                 <section>
-                                    <form method="post" action="form.php">
+                                   <form action="form.php" method="post">
                                            
-                                            <input type="text" id="txtnum" name="num" value="<?echo $IDmuestra?>" placeholder="..." readonly>
-                                            <br>
-                                            <input name="title" placeholder="titulo" value="<?echo $titulo?>" type="text" required />
-                                            <br>
-
-                                            <div class="row 50%">
-                                            <div class="12u">
-                                            <textarea name="contenido" placeholder="Noticia"><?echo $contenido?></textarea>
-                                            </div>
-                                            </div>
+                                            <input type="text" id="txtnum" name="num" value="<?echo $id?>" placeholder="..." readonly>
                                             <br>
                                             <input type="text" id="txtfecha" name="fecha" value="<?echo $fecha?>" required placeholder="Fecha">
+                                            <br>
+                                            <input type="text" id="txttiutulo" name="titulo" value="<?echo $titulo?>" required placeholder="Titulo Efemeride">
+                                            <br>
+                                            <div class="row 50%">
+                                            <div class="12u">
+                                            <textarea id="txtdescripcion" name="descripcion"  required placeholder="Descripcion de Efemeride"><?echo $contenido?></textarea>
+                                            </div>
+                                            </div>
                                             <br>
                                             <div class="row 50%">
                                             <div class="12u">
                                             <br>    
-                                            <input  class="form-button-submit button icon fa-envelope" type="submit" value="info">
+                                            <input name="info" type="submit" value="Guardar">
                                             <br>
                                             </div>
                                             </div>
@@ -200,7 +200,7 @@
                  </div>  
                     
                     
-        -->
+        
 
         <!-- Scripts -->
             <script src="assets/js/jquery.min.js"></script>

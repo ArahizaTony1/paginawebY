@@ -92,9 +92,9 @@ if($_SESSION['uname']!=null){
                 $html.="<td>".$row['fecha']."</td>";
                 $html.="<td>".$row['tipo']."</td>";
                 //$html.="<td><a href='formefe.php?id=".$row['id']."' ><img src='img/eraser.svg' title='Eliminar' width='15%'/></a></td>";
-                $html.="<td><a href='#' onclick='eliminar(".$row['id'].")' ><img src='img/eraser.svg' title='Eliminar' width='15%'/></a></td>";
+                $html.="<td><a href='#' onclick='eliminar(".$row['id'].")' >Eliminar</a></td>";
                 
-                $html.="<td><a href='form.php?id=".$row['id']."' ><img src='img/edit.svg' title='Editar' width='15%'/></a></td>";
+                $html.="<td><a href='form.php?id=".$row['id']."' >Editar</a></td>";
                 
                 
                 $html.="</tr>";
@@ -141,8 +141,14 @@ if($_SESSION['uname']!=null){
             }
         });
     }
-</script>			
-			<!-- Footer 
+</script>	
+</div>
+</section>
+</div>
+</div>
+
+		
+			
 				<div id="footer-wrapper">
 					<div id="footer" class="container">
 						<header>
@@ -223,7 +229,7 @@ if($_SESSION['uname']!=null){
 				</div>
 
 		</div>
--->
+
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.dropotron.min.js"></script>
