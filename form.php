@@ -61,12 +61,12 @@
         $t=$_POST['titulo'];
         $c=$_POST['descripcion'];
         $f=$_POST['fecha'];
-        $tipo=$_POST['tipo'];
+        
         $conn = new mysqli(servidorbd, usuariobd, psw, nombrebd);
        
         if(isset($_POST['num']) && $_POST['num']>0){ //-modificada
             $id1=$_POST['num'];
-            $sql="UPDATE efemerides_completas SET titulo='$t' , contenido='$c', fecha='$f', tipo='$tipo' WHERE id=$id1";
+            $sql="UPDATE efemerides_completas SET titulo='$t' , contenido='$c', fecha='$f' WHERE id=$id1";
             $conn->query($sql);
             $conn->close();
             header('Location: /youtube/formulario.php');
@@ -78,7 +78,7 @@
                 if ($conn->connect_error) {
                     die("Error de conexión: " . $conn->connect_error);
                 } 
-                $sql="INSERT INTO efemerides_completas (titulo,contenido,fecha,tipo) VALUES('$t','$c','$f','$tipo')";
+                $sql="INSERT INTO efemerides_completas (titulo,contenido,fecha) VALUES('$t','$c','$f')";
                 if($conn->query($sql)===TRUE){
                     header('Location: /youtube/formulario.php');
                 }

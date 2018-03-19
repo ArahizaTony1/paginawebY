@@ -64,13 +64,13 @@ if($_SESSION['uname']!=null){
 							
 <table id="myTable">
   <tr class="header">
-    <th style="width:5%;">ID</th>  
-    <th style="width:10%;">Titulo</th>
+    <th style="width:6%;">ID</th>  
+    <th style="width:12%;">Titulo</th>
     <th style="width:20%;">Descripcion</th>
-    <th style="width:10%;">Fecha</th>
-      <th style="width:10%;">Tipo</th>
-    <th style="width:10%;">Remover</th>
-      <th style="width:10%;">Editar</th>
+    <th style="width:12%;">Fecha</th>
+      
+    <th style="width:13%;">Remover</th>
+      <th style="width:12%;">Editar</th>
   </tr>
 <?
     require_once('conexion.php');
@@ -90,7 +90,7 @@ if($_SESSION['uname']!=null){
                 $html.="<td>".$row['titulo']."</td>";
                 $html.="<td>".$row['contenido']."</td>";
                 $html.="<td>".$row['fecha']."</td>";
-                $html.="<td>".$row['tipo']."</td>";
+                
                 //$html.="<td><a href='formefe.php?id=".$row['id']."' ><img src='img/eraser.svg' title='Eliminar' width='15%'/></a></td>";
                 $html.="<td><a href='#' onclick='eliminar(".$row['id'].")' >Eliminar</a></td>";
                 
